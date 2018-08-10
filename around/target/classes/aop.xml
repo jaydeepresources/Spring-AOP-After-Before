@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/aop   
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+	<aop:aspectj-autoproxy />
+
+	<bean id="operation" class="com.Operations"></bean>
+	<bean id="concern" class="com.Concern"></bean>
+
+	<aop:config>
+		<aop:aspect id="myaspect" ref="concern">
+			<aop:pointcut id="pointCutBefore" expression="execution(* com.Operations.*(..))" />
+			<aop:around method="additionalTask" pointcut-ref="pointCutBefore" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>  
